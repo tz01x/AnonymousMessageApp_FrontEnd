@@ -1,33 +1,112 @@
-.App {
-  text-align: center;
+html,body{
+  /* overflow-x: hidden !important; */
+  /* font: normal 16px san-serif; */
+  /* font-family: 'Carter One', cursive;  */
+
+  font-family: 'Josefin Sans', sans-serif;
+  /* font-family: 'Audiowide', cursive;*/
+  margin: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-grow: 1;
 }
-
-.App-header {
-  background-color: #282c34;
+header{
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+section{
+  /* padding-top: 50px; */
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
 }
 
-.App-link {
-  color: #61dafb;
+.section-main{
+  color:white;
+  /* background-color: rgb(19, 13, 73); */
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: easeIn 1s  forwards cubic-bezier(0.4, 0, 0.2, 1) ;
+  transform: scale(0) ;
+  transform-origin: bottom;
+  
+}
+@keyframes easeIn{
+  100%{
+    transform: scale(1);
+   
+  }
+}
+.btn{
+font-size: 20px;
+text-align: center;
+border: none;
+border-radius: 4px;
+padding:10px;
+font-weight: 700;
+background-color: rgb(111, 201, 150);
+box-shadow: 2px 2px 15px rgba(14, 14, 14, 0.267) ;
+/* justify-content: center; */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn:active{
+box-shadow: 2px 2px 5px rgba(14, 14, 14, 0.267) ;
+
+}
+
+.bg-img{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  background-size: cover;
+  /* background-image: url(./21445119.jpg); */
+  /* background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fbackground%2520image%2F&psig=AOvVaw2pZCaRKLWc6EBWbVUC3sSw&ust=1584256872047000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNCL9va2megCFQAAAAAdAAAAABAU"); */
+/* background-color: seagreen; */
+background-color: rgb(34,34,34);
+}
+/* footer start  */
+
+
+footer{
+  background-color: rgb(34, 34, 34);
+  width: 100%;
+  height: 16vh;
+  color: #bfbeba;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+footer hr{
+  width: 100%;
+  height: 2px;
+  border: 0;
+  /* background-color: rgba(5, 77, 87, 0.993); */
+  box-shadow: 0px 0px 5px rgb(111, 201, 150);
+}
+
+footer div,a{
+  margin: 8px;
+  
+}
+footer a{
+  text-decoration: none;
+  color:rgb(111, 201, 150);
 }
