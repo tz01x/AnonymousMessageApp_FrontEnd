@@ -5,16 +5,19 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import axios from 'axios';
+import SendMessage from "./sendMessage";
 import './App.css';
 import './Form_control.css';
 import About from "./about.js";
 import Nav from './nav/nav';
 import SignupForm from './SignupForm';
-
+import Loginform from './LoginForm';
+import Mymessages from "./myMessages";
+const getMessageurl = 'https://tumzied.pythonanywhere.com/api/messages/';
 function App(props) {
-
+  const [isloading,setloading]=useState(false);
   const [islogin, setLogin] = useState(false);
+  const [msg,setMsg]=useState(null);
   const [userinfo, setUserinfo] = useState(
     {
       token: null,
@@ -31,10 +34,10 @@ function App(props) {
   });
 
 
-  let baseurl = '/test_my-app';
+  let baseurl = '/test_my-app/';
 
   useEffect(() => {
-    console.log('render');
+    // console.log('render');
     // at first when the page load this funciton run and every compounent change 
     //his state this funciton fire up 
     if (islogin === false) {
@@ -52,23 +55,60 @@ function App(props) {
           expir: d.expire
         });
         setLogin(true);
+      
+       //now use can fatch there messages 
+           
+       
+         
+          
+          
 
+          
+      
+      
+    
       }
 
     }
 
     return () => {
-      console.log('finish unmount');
+      // console.log('finish unmount');
       // this function is call when a particular data is update complectly 
       //like here , when userinfo verible update finish then this function is call
-      console.log(userinfo.username);
+      // console.log(userinfo.username);
 
 
     };
 
-  }, [userinfo, islogin]);
+  }, [islogin]);
 
+ function  showlogoutUrl() {
+    if (islogin){
+      return (
+        <>
+        |<a href='#' onClick={()=> {
+            if(islogin){
 
+            setUserinfo(
+              {
+                token: null,
+                uid: null,
+                username: null,
+                expir: null
+              }
+            );
+            setLogin(false);
+            window.localStorage.clear()
+          }
+
+          }} >LogOut</a> 
+        </>
+      );
+    }
+    return <></>;
+   
+
+  }
   return (
     <Router>
       <div>
@@ -87,10 +127,18 @@ function App(props) {
               setUserinfo={setUserinfo}
               islogin={islogin}
               setLogin={setLogin}
+
+              isloading={isloading}
+              setloading={setloading}
+              msg={msg}
+              setMsg={setMsg}
             ></Home>
           </Route>
-          <Route path={baseurl + '/about'}>
+          <Route path={baseurl + 'about/'}>
             <About />
+          </Route>
+          <Route exact path={baseurl+'sendmessage/:uid'} >
+            <SendMessage/>
           </Route>
 
           <Route path="*"  >
@@ -105,6 +153,7 @@ function App(props) {
         </div>
         <div>
           <Link to={baseurl} >Home</Link>|<Link to={'./about/'}>About</Link>
+          {showlogoutUrl()}
         </div>
       </footer>
 
@@ -115,6 +164,41 @@ function App(props) {
 }
 
 function Home(props) {
+  const [showSignupForm,setShowSingupForm]=useState(true);
+
+  const showComponunt=()=>{
+    if(props.islogin===true&&props.islogin!=null){
+      return <Mymessages 
+      userinfo={props.userinfo} 
+    
+      isloading={props.isloading}
+      setloading={props.setloading}
+      msg={props.msg}
+      setMsg={props.setMsg}
+       />;
+    }else{
+      if(showSignupForm){
+        return <SignupForm
+        FormValues={props.FormValues}
+        setFormValues={props.setFormValues}
+        userinfo={props.userinfo}
+        setUserinfo={props.setUserinfo}
+        islogin={props.islogin}
+        setLogin={props.setLogin}
+        setShowSingupForm={setShowSingupForm}
+      ></SignupForm>;
+      }
+      return <Loginform 
+        FormValues={props.FormValues}
+        setFormValues={props.setFormValues}
+        userinfo={props.userinfo}
+        setUserinfo={props.setUserinfo}
+        islogin={props.islogin}
+        setLogin={props.setLogin}
+      setShowSingupForm={setShowSingupForm}
+      />;
+    }
+  }
   return (
     <div className="App">
 
@@ -122,29 +206,22 @@ function Home(props) {
         <div className='bg-img' ></div>
         <div className='section-main' >
 
-          {props.islogin ? `, ${props.userinfo.username}` : ''}
+          {/* <h1 className=''>Hi, *_* </h1>
+          {props.islogin} */}
+          {/* {props.islogin ? `, ${props.userinfo.username}` : ''} */}
+          {/* if login true how all messages else shoe signupform  */}
 
-          <h1 className=''>Hi, *_* </h1>
-          <SignupForm
-            FormValues={props.FormValues}
-            setFormValues={props.setFormValues}
-            userinfo={props.userinfo}
-            setUserinfo={props.setUserinfo}
-            islogin={props.islogin}
-            setLogin={props.setLogin}
-          ></SignupForm>
+          
+          {showComponunt()}
 
         </div>
       </section>
-
-
-      
-
-
-
     </div>
   );
 }
+
+
+
 
 function Error() {
   return (<section>404</section>);

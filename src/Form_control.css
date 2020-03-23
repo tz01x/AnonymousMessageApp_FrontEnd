@@ -5,3 +5,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.section-signup-title {
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Josefin Sans';
+    color: #6ec895;
+    text-shadow: -1px 4px 8px black;
+}

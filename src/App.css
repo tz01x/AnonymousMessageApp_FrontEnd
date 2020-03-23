@@ -15,12 +15,15 @@ html,body{
   flex-grow: 1;
 }
 header{
-  position: absolute;
+  /* position: absolute; */
+  background: #222222;
   width: 100%;
   z-index: 2;
 }
 section{
-  /* padding-top: 50px; */
+  /* padding-top:
+   50px; */
+   
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -84,6 +87,7 @@ background-color: rgb(34,34,34);
 
 
 footer{
+  position: relative;
   background-color: rgb(34, 34, 34);
   width: 100%;
   height: 16vh;
@@ -95,6 +99,8 @@ footer{
   justify-content: center;
 }
 footer hr{
+  position: absolute;
+  top: -9px;
   width: 100%;
   height: 2px;
   border: 0;
@@ -109,4 +115,25 @@ footer div,a{
 footer a{
   text-decoration: none;
   color:rgb(111, 201, 150);
+}
+
+
+.msg {
+  box-shadow:11px 9px 19px 0px #02020096, -15px -13px 10px 9px #2222228f;
+  padding: 13px;
+  border-radius: 9px;
+  margin: 54px;
+  background: linear-gradient(45deg, #4acbd630, #222222);
+}
+
+.msg-title {
+  font-size: 25px;
+    min-height: 61px;
+    width: 275px;
+}
+.msg-time {
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
