@@ -13,6 +13,7 @@ import Nav from './nav/nav';
 import SignupForm from './SignupForm';
 import Loginform from './LoginForm';
 import Mymessages from "./myMessages";
+import ResponsiveDialog from "./dialog"
 const getMessageurl = 'https://tumzied.pythonanywhere.com/api/messages/';
 function App(props) {
   const [isloading,setloading]=useState(false);
@@ -201,7 +202,7 @@ function Home(props) {
   }
   return (
     <div className="App">
-
+      <ResponsiveDialog></ResponsiveDialog>
       <section>
         <div className='bg-img' ></div>
         <div className='section-main' >
